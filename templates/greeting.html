@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="styles/report.css" />
+  </head>
+  <body>
+    <header class="report-header">
+      <img src="assets/logo.png" alt="Codex PDF logo" class="report-logo" />
+      <div class="report-title">
+        <h1>{{ title }}</h1>
+        <p class="subtitle">Prepared for {{ recipient }}</p>
+      </div>
+    </header>
+
+    <section class="section break-before break-after">
+      <p>test test test !!!</p>
+    </section>
+
+    <section class="section break-after">
+      <h2>Executive Summary</h2>
+      <p class="body-text">
+        Hello {{ recipient }}, this sample shows how WeasyPrint handles
+        multi-page reports using Jinja templates. The first page includes a
+        summary table and overview paragraphs. CSS rules control pagination so
+        that logical sections stay intact, while long content naturally flows
+        onto the next page.
+      </p>
+      <p class="body-text">
+        The layout uses page-break hints to keep the summary together and forces
+        the appendix to begin on a fresh page. Feel free to copy this structure
+        when you need deterministic pagination in your own PDFs.
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Task</th>
+            <th>Hours</th>
+            <th>Rate</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% set total = 0 %} {% for item in items %} {% set line_total =
+          item.hours * item.rate %} {% set total = total + line_total %}
+          <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ "%.2f"|format(item.hours) }}</td>
+            <td>${{ "%.2f"|format(item.rate) }}</td>
+            <td>${{ "%.2f"|format(line_total) }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="3">Grand total</td>
+            <td>${{ "%.2f"|format(total) }}</td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <p class="body-text">
+        Additional narrative content ensures the first page is filled with
+        realistic text. Below you will find repeated paragraphs to guarantee the
+        document spills over to a second page when rendered at A4 size with
+        standard margins.
+      </p>
+      {% for i in range(1, 5) %}
+      <p class="body-text">
+        Paragraph {{ i }}: Continuous improvement remains our guiding principle.
+        We document each iteration carefully, capture lessons learned, and share
+        the findings with stakeholders so decisions stay transparent and
+        defensible.
+      </p>
+      {% endfor %}
+    </section>
+
+    <section class="section break-before">
+      <h2>Appendix: Detailed Notes</h2>
+      <p class="body-text">
+        This section is forced onto a new page using the
+        <code>.break-before</code> rule. Long unordered lists, tables, or
+        textual digests can live here without disturbing the layout of prior
+        sections.
+      </p>
+      <ul class="long-list">
+        {% for i in range(1, 21) %}
+        <li>
+          Reference note {{ i }} – summarize supporting detail, attach evidence,
+          or record assumptions.
+        </li>
+        {% endfor %}
+      </ul>
+      <p class="body-text">
+        Add more structured content as needed. You can also insert charts or
+        images; WeasyPrint will respect the same page-break constraints
+        described above.
+      </p>
+    </section>
+
+    <footer>Generated with Jinja + WeasyPrint pagination demo.</footer>
+  </body>
+</html>
