@@ -1,0 +1,14 @@
+# Python virtual environments
+.venv/
+
+# WeasyPrint output
+output/
+
+# Bytecode / cache
+__pycache__/
+*.pyc
+
+# Editor settings
+.DS_Store
+.idea/
+.vscode/
