@@ -1,0 +1,89 @@
+{
+    "variable1": "value1",
+    "variable2": {
+        "subvariable1": "subvalue1",
+        "subvariable2": "subvalue2"
+    },
+    "variable3": [
+        1,
+        2,
+        3,
+        4,
+        5
+    ],
+    "variable4": true,
+    "variable5": null,
+    "variable6": 123.45,
+    "variable7": {
+        "nestedVariable1": {
+            "deepKey": "deepValue"
+        },
+        "nestedVariable2": [
+            {
+                "key": "valueA"
+            },
+            {
+                "key": "valueB"
+            }
+        ]
+    },
+    "variable8": {
+        "fetch": {
+            "url": "https://api.example.com/data",
+            "method": "GET",
+            "headers": {
+                "Authorization": "Bearer your_token_here"
+            },
+            "params": {
+                "limit": 10,
+                "offset": 0
+            },
+            "timeout": 5,
+            "default": []
+        }
+    },
+    "variable9": {
+        "fetch": {
+            "url": "https://api.example.com/other-data",
+            "method": "POST",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": {
+                "data1": "test1234"
+            },
+            "timeout": 10,
+            "default": {},
+            "transform": "json"
+        }
+    },
+    "variable10": {
+        "sequence": [
+            {
+                "action": "fetch",
+                "config": {
+                    "url": "https://api.example.com/step1",
+                    "method": "GET",
+                    "timeout": 5,
+                    "default": {}
+                },
+                "transform": "lowercase",
+                "id": "step1Data"
+            },
+            {
+                "action": "fetch",
+                "config": {
+                    "url": "https://api.example.com/step2?param={step1Data.key}",
+                    "method": "GET",
+                    "timeout": 5,
+                    "default": []
+                },
+                "id": "step2Data"
+            }
+        ]
+    },
+    "variable11": {
+        "value": "staticValue",
+        "transform": "uppercase"
+    }
+}

@@ -10,7 +10,7 @@
 
 @font-face {
   font-family: "Report Sans";
-  src: url("../fonts/DejaVuSans.ttf") format("truetype");
+  src: url("fonts/DejaVuSans.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
 }
@@ -110,4 +110,29 @@ footer {
 .subtitle {
   margin: 0.25rem 0 0;
   color: #5c6c82;
+}
+
+.report-meta {
+  margin-top: 0.35rem;
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.9rem;
+  color: #5c6c82;
+}
+
+.contributors {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.contributors li {
+  margin-bottom: 0.6rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid #e3e7f0;
+}
+
+.contributors .muted {
+  color: #6e7a91;
+  font-size: 0.9rem;
 }

@@ -15,7 +15,7 @@ def render_pdf(
     context: dict,
     output_name: str,
     stylesheets: Iterable[Path] | None = None,
-) -> Path:
+):
     """
     Render the given Jinja template with context and turn it into a PDF.
     """

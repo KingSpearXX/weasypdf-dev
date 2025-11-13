@@ -1,0 +1,35 @@
+{
+  "title": "WeasyPrint + Jinja demo",
+  "recipient": "Example Recipient",
+  "metadata": {
+    "report_id": "INV-0000",
+    "owner": "Template Owner"
+  },
+  "parameters": {
+    "team_limit": 2,
+    "notes_user_id": 1,
+    "notes_limit": 5
+  },
+  "items": [
+    {"name": "Feature work", "hours": 3.0, "rate": 120},
+    {"name": "Debugging", "hours": 1.5, "rate": 140},
+    {"name": "Testing", "hours": 2.25, "rate": 105}
+  ],
+  "contributors": [],
+  "appendix": {
+    "notes": []
+  },
+  "__remote__": [
+    {
+      "url": "https://jsonplaceholder.typicode.com/users?_limit={parameters.team_limit}",
+      "target": "contributors",
+      "enabled": true
+    },
+    {
+      "url": "https://jsonplaceholder.typicode.com/todos?userId={parameters.notes_user_id}&_limit={parameters.notes_limit}",
+      "target": "appendix.notes",
+      "mode": "replace",
+      "enabled": true
+    }
+  ]
+}

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>{{ title }}</title>
-    <link rel="stylesheet" href="styles/report.css" />
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <header class="report-header">
@@ -11,6 +11,10 @@
       <div class="report-title">
         <h1>{{ title }}</h1>
         <p class="subtitle">Prepared for {{ recipient }}</p>
+        <div class="report-meta">
+          <span><strong>ID:</strong> {{ metadata.report_id }}</span>
+          <span><strong>Owner:</strong> {{ metadata.owner }}</span>
+        </div>
       </div>
     </header>
 
@@ -77,6 +81,25 @@
       {% endfor %}
     </section>
 
+    {% if contributors %}
+    <section class="section break-before">
+      <h2>Contributors (Remote Data)</h2>
+      <p class="body-text">
+        The list below is fetched from a remote endpoint defined in the template
+        data. It demonstrates how remote context can be merged before
+        rendering.
+      </p>
+      <ul class="contributors">
+        {% for contributor in contributors %}
+        <li>
+          <strong>{{ contributor.name }}</strong><br />
+          <span class="muted">{{ contributor.email }} · {{ contributor.company.name }}</span>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+    {% endif %}
+
     <section class="section break-before">
       <h2>Appendix: Detailed Notes</h2>
       <p class="body-text">
@@ -85,6 +108,13 @@
         textual digests can live here without disturbing the layout of prior
         sections.
       </p>
+      {% if appendix.notes %}
+      <ul class="long-list">
+        {% for note in appendix.notes %}
+        <li>{{ note.title }}</li>
+        {% endfor %}
+      </ul>
+      {% else %}
       <ul class="long-list">
         {% for i in range(1, 21) %}
         <li>
@@ -93,6 +123,7 @@
         </li>
         {% endfor %}
       </ul>
+      {% endif %}
       <p class="body-text">
         Add more structured content as needed. You can also insert charts or
         images; WeasyPrint will respect the same page-break constraints
