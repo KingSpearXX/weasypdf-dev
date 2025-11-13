@@ -46,6 +46,10 @@ Generated PDFs are stored in the `output/` directory using the job id as the fil
 -   `data_source` (optional) is resolved relative to that folder, letting you pick any JSON preset such as `data/customer-42.json`.
 -   `context` is an arbitrary object merged last, so you can pass IDs, names, item overrides, or `parameters` that your template’s JSON/remote fetch placeholders reference.
 
+### Data-map plugins
+
+Custom data massages (e.g., SAP row sequencing) live under `plugins/`. Every module in that package is auto-imported at startup; expose a `register(registry)` function or define `PLUGIN`/`PLUGIN_NAME` and it becomes available in the shared `plugins.REGISTRY` mapping for the resolver to use.
+
 ### Template structure
 
 Templates live under `templates/<name>/` so each design is fully self-contained. Example:

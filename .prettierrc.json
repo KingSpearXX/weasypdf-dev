@@ -13,5 +13,8 @@
   "tabs": false,
   "tabWidth": 4,
   "trailingComma": "none",
-  "useTabs": false
+  "useTabs": false,
+  "exclude": [
+    "**/templates/**"
+  ]
 }

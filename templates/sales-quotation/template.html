@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>{{ title }}</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <h1>{{ title }}</h1>
+        <p>
+            Doc entry {{ metadata.docEntry }} (seed {{ docEntry }}) for card {{
+            CardCode }}
+        </p>
+
+        <section>
+            <h2>Line Items</h2>
+            {% for item in DocumentRows %} {% if item.LineType == "dlt_Regular"
+            %}
+            <div class="datatable-row">
+                <div class="datatable-body-cell">
+                    <div class="datatable-content">
+                        <p class="ptext">{{ item.ItemDescription }}</p>
+                        <div class="datatable-content-2">
+                            <div class="text-wrapper-10">
+                                {{ item.ItemCode }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="datatable-body-cell-2">
+                    <div class="datatable-content-3">
+                        <div class="text-wrapper-11">{{ item.VendorNum }}</div>
+                    </div>
+                </div>
+                <div class="datatable-content-wrapper">
+                    <div class="datatable-content">
+                        <div class="text-wrapper-12">{{ item.UnitPrice }}</div>
+                        <div class="datatable-content-2">
+                            <p class="text-wrapper-13">
+                                Lead time is {{ item.U_LeadTime }} days
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="datatable-body-cell-3">
+                    <div class="datatable-content-4">
+                        <div class="text-wrapper-14">{{ item.Quantity }}</div>
+                    </div>
+                </div>
+                <div class="datatable-body-cell-2">
+                    <div class="datatable-content-5">
+                        <div class="text-wrapper-15">{{ item.LineTotal }}</div>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="frame-10">
+                <img class="img" src="assets/image.svg" alt="Bullet" />
+                <p class="LineText">{{ item.LineText }}</p>
+            </div>
+            {% endif %} {% else %}
+            <p>No document rows were provided.</p>
+            {% endfor %}
+        </section>
+    </body>
+</html>

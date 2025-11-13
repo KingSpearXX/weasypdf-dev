@@ -1,0 +1,77 @@
+{
+  "title": "test - Sales Quotation",
+  "metadata": {
+    "docEntry": "{DocNum}"
+  },
+  "quotedata": {
+    "sequence": [
+      {
+        "action": "fetch",
+        "id": "quotation",
+        "config": {
+          "url": "http://dev.servicemaster.libertysupply.local/api/sap/Quotations",
+          "method": "GET",
+          "params": {
+            "$select": "*",
+            "$filter": "DocNum eq {DocNum}"
+          }
+        }
+      },
+      {
+        "action": "assign",
+        "id": "CardCode",
+        "value": {
+          "ref": "quotation.value.0.CardCode"
+        }
+      },
+      {
+        "action": "assign",
+        "id": "DocEntry",
+        "value": {
+          "ref": "quotation.value.0.DocEntry"
+        }
+      },
+      {
+        "action": "fetch",
+        "id": "quotationDetail",
+        "config": {
+          "url": "http://dev.servicemaster.libertysupply.local/api/sap/Quotations({DocEntry})",
+          "method": "GET"
+        }
+      },
+      {
+        "action": "plugin",
+        "id": "documentRows",
+        "name": "doc_rows",
+        "kwargs": {
+          "document_lines": {
+            "ref": "quotationDetail.DocumentLines"
+          },
+          "special_lines": {
+            "ref": "quotationDetail.DocumentSpecialLines"
+          }
+        }
+      }
+    ]
+  },
+  "CardCode": {
+    "value": {
+      "ref": "CardCode"
+    }
+  },
+  "DocumentLines": {
+    "value": {
+      "ref": "quotationDetail.DocumentLines"
+    }
+  },
+  "DocumentSpecialLines": {
+    "value": {
+      "ref": "quotationDetail.DocumentSpecialLines"
+    }
+  },
+  "DocumentRows": {
+    "value": {
+      "ref": "documentRows"
+    }
+  }
+}

@@ -9,6 +9,9 @@ from typing import Any, Callable, Mapping, MutableMapping, Sequence
 from urllib import error as url_error
 from urllib import parse, request
 
+from plugins import REGISTRY as PLUGIN_REGISTRY
+from plugins import load_plugins
+
 PLACEHOLDER_PATTERN = re.compile(r"{([^{}]+)}")
 
 
@@ -30,9 +33,11 @@ class DataMapResolver:
         *,
         default_timeout: float = 15.0,
         http_fetcher: Callable[[FetchRequest], bytes] | None = None,
+        plugin_registry: Mapping[str, Callable[..., Any]] | None = None,
     ):
         self.default_timeout = default_timeout
         self._http_fetcher = http_fetcher
+        self._plugins = dict(plugin_registry or load_plugins() or PLUGIN_REGISTRY)
 
     def resolve(
         self,
@@ -68,6 +73,10 @@ class DataMapResolver:
                 value = self._resolve_node(node["value"], state)
                 return self._apply_transform(node.get("transform"), value)
 
+            if set(node.keys()) == {"ref"}:
+                reference = self._resolve_reference(str(node["ref"]), state)
+                return deepcopy(reference)
+
             # Nested mapping: resolve each item individually
             nested: dict[str, Any] = {}
             for key, value in node.items():
@@ -87,6 +96,8 @@ class DataMapResolver:
                 result = self._handle_fetch(step.get("config", {}), state)
             elif action == "assign":
                 result = self._resolve_node(step.get("value"), state)
+            elif action == "plugin":
+                result = self._handle_plugin(step, state)
             else:
                 result = self._resolve_node(step, state)
 
@@ -98,6 +109,55 @@ class DataMapResolver:
             results.append(result)
 
         return results
+
+    def _handle_plugin(
+        self,
+        step: Mapping[str, Any],
+        state: MutableMapping[str, Any],
+    ) -> Any:
+        name = step.get("name")
+        if not name:
+            raise ValueError("plugin action requires a 'name' field")
+
+        plugin = self._plugins.get(str(name))
+        if plugin is None:
+            raise ValueError(f"Unknown plugin '{name}'")
+
+        raw_args = step.get("args", [])
+        raw_kwargs = step.get("kwargs", {})
+        if raw_args and (
+            not isinstance(raw_args, Sequence) or isinstance(raw_args, (str, bytes))
+        ):
+            raise TypeError("plugin args must be a list")
+        if raw_kwargs and not isinstance(raw_kwargs, Mapping):
+            raise TypeError("plugin kwargs must be an object")
+
+        args = [
+            self._resolve_plugin_param(value, state) for value in (raw_args or [])
+        ]
+        kwargs = {
+            key: self._resolve_plugin_param(value, state)
+            for key, value in (raw_kwargs or {}).items()
+        }
+
+        return plugin(*args, **kwargs)
+
+    def _resolve_plugin_param(self, value: Any, state: Mapping[str, Any]) -> Any:
+        if isinstance(value, str):
+            return self._interpolate(value, state)
+        if isinstance(value, Mapping):
+            if "ref" in value and set(value.keys()) == {"ref"}:
+                reference = self._resolve_reference(str(value["ref"]), state)
+                return deepcopy(reference)
+            return {
+                key: self._resolve_plugin_param(inner, state)
+                for key, inner in value.items()
+            }
+        if isinstance(value, Sequence) and not isinstance(value, (str, bytes)):
+            return [
+                self._resolve_plugin_param(item, state) for item in value
+            ]
+        return deepcopy(value)
 
     def _handle_fetch(
         self,
