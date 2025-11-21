@@ -1,0 +1,410 @@
+@import url('./global.css');
+
+@font-face {
+    font-family: var(--body-font);
+    src: url(var(--body-font-url));
+}
+
+@font-face {
+    font-family: var(--body-bold-font);
+    src: url(var(--body-bold-font-url));
+}
+
+body {
+    margin: 0;
+    background: var(--background-color);
+    color: #000000;
+}
+.document-shell {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.document-content {
+    flex: 1;
+}
+.bold {
+    font-weight: 800;
+}
+.emphasize {
+    color: var(--text-light-blue);
+}
+
+/* Header CSS Code */
+.header-sm {
+    display: flex;
+    flex-direction: column;
+}
+.header-sm-title {
+    color: var(--text-dark-blue);
+    position: relative;
+    z-index: 1;
+    width: 700px;
+    align-self: end;
+    text-transform: uppercase;
+    text-align: right;
+    margin-bottom: 1px;
+    font-family: var(--body-bold-font);
+}
+.header-sm-row {
+    margin-top: -1px;
+    display: flex;
+    justify-content: flex-start;
+    font-family: var(--body-font);
+    font-size: 0.8rem;
+    letter-spacing: -1px;
+    line-height: 1.5rem;
+}
+.header-sm-integrated-rgb-trimmed {
+    width: 120px;
+    margin-top: -10px;
+    margin-right: 27px;
+}
+.header-sm-col-left {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    margin: 0px;
+    gap: 0px;
+}
+.header-sm-col-left p {
+    margin: 0px;
+}
+.header-sm-col-left object {
+    margin-right: 5px;
+}
+.header-sm-col-left .bold {
+    color: var(--text-dark-blue);
+}
+.header-sm-col-right {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+}
+.header-sm-col-right p {
+    margin: 0px;
+}
+.header-sm-inline-row {
+    display: flex;
+}
+.header-sm-inline-row-data {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.header-sm-col-right .header-sm-inline-row-data:nth-child(1) {
+    color: var(--text-dark-blue);
+}
+.header-sm-inline-row-data p:nth-child(1) {
+    min-width: 100px;
+}
+
+/* Row CSS Code */
+.row-customer {
+    margin-top: 40px;
+    padding: 20px 20px 30px 20px;
+    box-sizing: border-box;
+    background-color: #fff;
+    border-width: 1px 1px 0 1px;
+    border-style: solid;
+    border-color: var(--border-color);
+    width: 100%;
+    font-family: var(--body-font);
+    display: flex;
+    justify-content: space-between;
+}
+.row-customer .column {
+    display: flex;
+    flex-direction: column;
+    width: 220px;
+}
+.row-customer .column p {
+    line-height: 1.25rem;
+    font-size: 0.7rem;
+    margin: 0px;
+}
+.row-customer .column h3 {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-dark-blue);
+    position: relative;
+    display: block;
+    margin: 0 0 8px;
+    padding-bottom: 6px;
+}
+.row-customer .column h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: var(--border-color);
+}
+.row-lines {
+    padding: 0px 20px 50px 20px;
+    box-sizing: border-box;
+    background-color: #fff;
+    border-width: 0px 1px 0 1px;
+    border-style: solid;
+    border-color: var(--border-color);
+    width: 100%;
+    font-family: var(--body-font);
+}
+.row-lines-header {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-dark-blue);
+    padding-bottom: 10px;
+}
+
+/* Assign the row lines column width here */
+.row-lines-header .column:nth-child(1) {
+    width: 50%;
+}
+.row-lines-header .column:nth-child(2) {
+    width: 10%;
+}
+.row-lines-header .column:nth-child(3) {
+    text-align: center;
+    width: 20%;
+}
+.row-lines-header .column:nth-child(4) {
+    width: 10%;
+}
+.row-lines-header .column:nth-child(5) {
+    text-align: right;
+    width: 10%;
+}
+.row-lines-data {
+    display: flex;
+    flex-direction: column;
+}
+.row-line {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    font-family: var(--body-font);
+    line-height: 1.25rem;
+    font-size: 0.7rem;
+}
+/* Assign the row lines column width here */
+.row-line .column:nth-child(1) {
+    padding-right: 10px;
+    width: 50%;
+}
+.row-line .column:nth-child(2) {
+    text-align: left;
+    width: 20%;
+}
+.row-line .column:nth-child(3) {
+    text-align: center;
+    width: 10%;
+}
+.row-line .column:nth-child(4) {
+    text-align: center;
+    width: 10%;
+}
+.row-line .column:nth-child(5) {
+    text-align: right;
+    width: 10%;
+}
+.row-line-meta {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-between;
+    font-family: var(--body-font);
+    font-size: 0.6rem;
+    line-height: 1.25rem;
+    color: var(--text-dark-grey);
+}
+.row-line-meta p:nth-child(2) {
+    flex: 0 0 30%;
+    text-align: left;
+}
+.row-line-text {
+    display: flex;
+    align-items: stretch;
+}
+.row-line-text p {
+    flex: 0 0 40%;
+    font-size: 0.6rem;
+    line-height: 0.7rem;
+    margin: 5px 0px 0px 5px;
+}
+.row-liner {
+    display: flex;
+    flex-direction: row;
+}
+.row-liner div {
+    width: 100%;
+    height: 1px;
+    background-color: var(--border-color);
+    margin-top: 10px;
+}
+
+/* Total Card CSS Code */
+.row-total {
+    padding: 0px 20px 20px 20px;
+    box-sizing: border-box;
+    background-color: #fff;
+    border-width: 0px 1px 1px 1px;
+    border-style: solid;
+    border-color: var(--border-color);
+    width: 100%;
+    font-family: var(--body-font);
+    font-size: 0.7rem;
+    display: flex;
+    justify-content: flex-end;
+}
+.total-card {
+    width: 250px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--card-color);
+    border-radius: 2px;
+    border: 0.5px solid var(--text-light-blue);
+    box-sizing: border-box;
+    padding: 10px;
+}
+.total-card-inline-data {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.total-card-inline-data p {
+    margin: 5px;
+}
+.total-card-inline-data p:nth-child(1) {
+    width: 100px;
+}
+.total-card-inline-data p:nth-child(2) {
+    width: 10px;
+}
+.total-card-inline-data p:nth-child(3) {
+    text-align: right;
+    width: 86px;
+}
+.total-card .total-card-inline-data:last-child {
+    margin-top: 10px;
+    padding-top: 6px;
+    border-top: 0.5px solid var(--text-light-blue);
+}
+
+/* Processing Details and Account Manager */
+.additonal-data {
+    display: flex;
+    flex-direction: row;
+    font-family: var(--body-font);
+    font-size: 0.6rem;
+    justify-content: flex-start;
+    padding-top: 10px;
+}
+.additonal-data p {
+    margin: 5px;
+}
+.additonal-data .section-title {
+    padding-bottom: 5px;
+    color: var(--text-dark-blue);
+}
+.processing-data {
+    flex: 0 0 60%;
+    display: flex;
+    flex-direction: column;
+}
+.account-manager {
+    flex: 0 0 40%;
+    display: flex;
+    flex-direction: column;
+}
+.inline-label-data {
+    display: flex;
+    flex-direction: row;
+}
+.processing-data .inline-label-data p:nth-child(1) {
+    width: 75px;
+}
+.processing-data .notes {
+    color: var(--text-dark-blue);
+}
+.account-manager .inline-label-data p:nth-child(1) {
+    width: 30px;
+}
+
+/* Footer CSS Code */
+.pdf-footer {
+    position: running(pdf-footer);
+    width: 100%;
+    padding: 0 8mm;
+    box-sizing: border-box;
+}
+.footer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0 2px;
+    border-top: 0.5px solid var(--text-light-grey);
+    font-size: 7pt;
+}
+.footer-text {
+    flex: 1 1 auto;
+    margin: 0;
+    color: var(--text-dark-grey);
+    font-family: var(--body-font);
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: nowrap;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.footer-link {
+    display: inline-flex;
+    align-items: center;
+    color: var(--text-light-blue);
+    font-family: var(--body-font);
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    letter-spacing: 0px;
+    text-align: left;
+    text-decoration: none;
+    white-space: nowrap;
+}
+.footer-line {
+    display: inline-block;
+    width: 0.5px;
+    height: 10px;
+    background-color: var(--text-light-grey);
+    margin-right: 8px;
+    margin-left: 8px;
+}
+.footer-page {
+    flex: 0 0 auto;
+    margin-left: 16px;
+    color: var(--text-dark-grey);
+    font-family: var(--body-font);
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0;
+    white-space: nowrap;
+    text-align: right;
+}
+.footer-page::before {
+    content: 'Page ' counter(page) ' of ' counter(pages);
+}

@@ -11,11 +11,9 @@ BASE_DIR = Path(__file__).parent
 TEMPLATE_ROOT = BASE_DIR / "templates"
 OUTPUT_DIR = BASE_DIR / "output"
 
-
 def resolve_context(
     template_slug: str,
     datamap_name: str = "data/datamap.json",
-    *,
     seed_context: Mapping | None = None,
 ) -> dict:
     """Resolve the datamap under templates/<slug>/ using DataMapResolver."""
@@ -34,12 +32,9 @@ def resolve_context(
         return merged
     return resolved
 
-
 def render_pdf(
     template_slug: str,
     context: Mapping,
-    *,
-    template_file: str = "template.html",
     output_name: str,
 ) -> Path:
     """Render templates/<slug>/template.html using the resolved context."""
@@ -56,9 +51,9 @@ def render_pdf(
         autoescape=select_autoescape(["html", "xml"]),
     )
     try:
-        template = env.get_template(template_file)
+        template = env.get_template('template.html')
     except Exception as exc:  # noqa: BLE001
-        raise RuntimeError(f"Failed to load template '{template_file}'") from exc
+        raise RuntimeError(f"Failed to load template 'template.html'") from exc
 
     try:
         html = template.render(**resolved_context)

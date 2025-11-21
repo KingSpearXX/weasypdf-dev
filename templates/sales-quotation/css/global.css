@@ -1,0 +1,13 @@
+:root {
+    --background-color: #f5f6f3;
+    --body-font: 'TT Norms Pro Normal';
+    --body-bold-font: 'TT Norms Pro';
+    --body-font-url: '../fonts/tt-norms-pro-normal.woff2';
+    --body-bold-font-url: '../fonts/tt-norms-pro-bold.woff2';
+    --text-light-blue: #009bd4;
+    --text-dark-blue: #1c3c70;
+    --text-light-grey: #d4d6d8;
+    --text-dark-grey: #677279;
+    --card-color: #edfaff;
+    --border-color: #e1e3e4;
+}
