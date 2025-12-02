@@ -1,20 +1,20 @@
 <div class="row-customer">
     <div class="column">
         <h3>Customer Account</h3>
-        <p>SPM Oil & Gast</p>
-        <p>601 Weir Way</p>
-        <p>Forth Worth TX 76108</p>
+        <p>{{QuoteData.CardName}}</p>
+        <p>{{QuoteData.AddressExtension.BillToStreet}}</p>
+        <p>{{QuoteData.AddressExtension.BillToCity}} {{QuoteData.AddressExtension.BillToState}} {{QuoteData.AddressExtension.BillToZipCode}}</p>
     </div>
     <div class="column">
         <h3>Shipping Location</h3>
-        <p>Industrial Process Supply</p>
-        <p>Attn: Lee Lopez</p>
-        <p>49 Hector Bunker St.</p>
-        <p>Caguas, PR 725</p>
+        <p>{{QuoteData.AddressExtension.ShipToStreet}}</p>
+        <p>{{QuoteData.AddressExtension.ShipToBlock}}</p>
+        <p>{{QuoteData.AddressExtension.ShipToCity}} {{QuoteData.AddressExtension.ShipToState}}</p>
+        <p>{{QuoteData.AddressExtension.ShipToZipCode}} {{QuoteData.AddressExtension.ShipToCountry}}</p>
     </div>
     <div class="column">
         <h3>Logistics Details</h3>
-        <p>Contact: Lee Lopez</p>
+        <p>Contact: {{ContactPersonData.Name}}</p>
         <p class="emphasize">Shipping cost to be determined</p>
     </div>
 </div>

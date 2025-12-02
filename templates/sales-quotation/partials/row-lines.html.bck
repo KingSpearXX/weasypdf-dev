@@ -1,0 +1,44 @@
+<div class="row-lines">
+    <div class="row-lines-header">
+        <div class="column">Item</div>
+        <div class="column">MPN</div>
+        <div class="column">Price</div>
+        <div class="column">Qty</div>
+        <div class="column">Total</div>
+    </div>
+    {{DocumentRowsData}}
+    <div class="row-lines-data">
+        <div class="row-line">
+            <div class="column">MODEL E-1510, 4 GC, SS, 30 HP, 1800 RPM, 286T FRAME, WITH 11.5" IMPELLER</div>
+            <div class="column">100208631</div>
+            <div class="column">$8,860.00</div>
+            <div class="column">1</div>
+            <div class="column">$8,860.00</div>
+        </div>
+        <div class="row-line-meta">
+            <p>SKU: LSSMFR15IG100C</p>
+            <p class="emphasize">Lead time is 10 days</p>
+        </div>
+        <div class="row-line-text emphasize">
+            <object data="assets/row/card-contents-icon.svg" class="row-icon" type="image/svg+xml"></object>
+            <p>
+                CENTRIFUGAL PUMPS 1 B&G Base Mounted Pump Series e-1510, Model e-1510, 4 GC, SS, 30 HP, 1800 RPM, 286T Frame, with 11.5" Impeller,
+                STDBuna/Carbon/Ceramic/SS/Bronze Seal, , BG Choice, ODP, Nema Premium Efficient, Inverter Suitable, 230/460/3/60 Motor, 640 gpm, 120
+                ft Wt.: 979 lbs ea.
+            </p>
+        </div>
+        <div class="row-liner"><div></div></div>
+        <div class="row-line">
+            <div class="column">MODEL E-1510, 4 GC, SS, 30 HP, 1800 RPM, 286T FRAME, WITH 11.5" IMPELLER</div>
+            <div class="column">100208631</div>
+            <div class="column">$8,860.00</div>
+            <div class="column">1</div>
+            <div class="column">$8,860.00</div>
+        </div>
+        <div class="row-line-meta">
+            <p>SKU: LSSMFR15IG100C</p>
+            <p class="emphasize">In Stock on 2/10/2025</p>
+        </div>
+        <div class="row-liner"><div></div></div>
+    </div>
+</div>

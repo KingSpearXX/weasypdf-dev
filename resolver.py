@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import time
 import re
 from copy import deepcopy
 from dataclasses import dataclass
@@ -98,6 +99,10 @@ class DataMapResolver:
                 result = self._resolve_node(step.get("value"), state)
             elif action == "plugin":
                 result = self._handle_plugin(step, state)
+            elif action == "delay":
+                seconds = float(step.get("seconds", 0))
+                time.sleep(max(seconds, 0))
+                result = None
             else:
                 result = self._resolve_node(step, state)
 

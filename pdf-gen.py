@@ -1,4 +1,5 @@
 import sys
+import helpers
 from pathlib import Path
 from typing import Mapping
 
@@ -45,6 +46,7 @@ def render_pdf(
         template_slug,
         seed_context=context,
     )
+    resolved_context["helpers"] = helpers
 
     env = Environment(
         loader=FileSystemLoader(template_dir),
@@ -77,7 +79,7 @@ def render_pdf(
 if __name__ == "__main__":
     TEMPLATE_SLUG = "sales-quotation"
     SEED_CONTEXT = {
-        "DocNum": 2332091,
+        "DocEntry": 34591,
     }
     try:
         pdf_path = render_pdf(

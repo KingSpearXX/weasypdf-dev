@@ -1,3 +1,73 @@
 {
-  "title": "test - Sales Quotation"
+  "Title": "Sales Quotation",
+  "ServiceLayer": {
+    "sequence": [
+      {
+        "action": "fetch",
+        "id": "fetchQuoteData",
+        "config": {
+          "url": "http://servicemaster.libertysupply.local/api/sap/Quotations({DocEntry})?$select=DocNum,DocDate,DocDueDate,CardCode,CardName,AddressExtension,ContactPersonCode,DocumentLines,DocumentSpecialLines",
+          "method": "GET",
+          "timeout": 10,
+          "default": {}
+        }
+      },
+      {
+        "action": "delay",
+        "seconds": 0.250
+      },
+      {
+        "action": "fetch",
+        "id": "fetchBPData",
+        "config": {
+          "url": "http://servicemaster.libertysupply.local/api/sap/BusinessPartners('{fetchQuoteData.CardCode}')",
+          "method": "GET",
+          "timeout": 10,
+          "default": {}
+        }
+      },
+      {
+        "action": "plugin",
+        "name": "find_item",
+        "args": [
+          {
+            "ref": "fetchBPData.ContactEmployees"
+          }
+        ],
+        "kwargs": {
+          "key": "InternalCode",
+          "value": "{fetchQuoteData.ContactPersonCode}"
+        },
+        "id": "fetchContactPersonData"
+      },
+      {
+        "action": "plugin",
+        "id": "fetchDocumentRows",
+        "name": "doc_rows",
+        "kwargs": {
+          "document_lines": {
+            "ref": "fetchQuoteData.DocumentLines"
+          },
+          "special_lines": {
+            "ref": "fetchQuoteData.DocumentSpecialLines"
+          }
+        }
+      }
+    ]
+  },
+  "QuoteData": {
+    "value": {
+      "ref": "fetchQuoteData"
+    }
+  },
+  "ContactPersonData": {
+    "value": {
+      "ref": "fetchContactPersonData"
+    }
+  },
+  "DocumentRowsData": {
+    "value": {
+      "ref": "fetchDocumentRows"
+    }
+  }
 }

@@ -1,5 +1,5 @@
 <div class="header-sm">
-    <h2 class="header-sm-title">{{title}}</h2>
+    <h2 class="header-sm-title">{{Title}}</h2>
     <div class="header-sm-row">
         <object data="assets/header-sm/header-sm-integrated.svg" class="header-sm-integrated-rgb-trimmed" type="image/svg+xml"></object>
         <div class="header-sm-col-left">
@@ -20,17 +20,17 @@
             <div class="header-sm-inline-row-data">
                 <p class="bold">Quote Number</p>
                 <p class="bold">:</p>
-                <p class="bold">1701033</p>
+                <p class="bold">{{QuoteData.DocNum}}</p>
             </div>
             <div class="header-sm-inline-row-data">
                 <p>Quote Date</p>
                 <p>:</p>
-                <p>2/20/2025</p>
+                <p>{{helpers.format_iso_date(QuoteData.DocDate)}}</p>
             </div>
             <div class="header-sm-inline-row-data">
                 <p>Pricing Valid Until</p>
                 <p>:</p>
-                <p>2/28/2025</p>
+                <p>{{helpers.format_iso_date(QuoteData.DocDueDate)}}</p>
             </div>
         </div>
     </div>

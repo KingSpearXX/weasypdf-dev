@@ -7,37 +7,21 @@
         <div class="column">Total</div>
     </div>
     <div class="row-lines-data">
+        {% for row in DocumentRowsData %}
         <div class="row-line">
-            <div class="column">MODEL E-1510, 4 GC, SS, 30 HP, 1800 RPM, 286T FRAME, WITH 11.5" IMPELLER</div>
-            <div class="column">100208631</div>
-            <div class="column">$8,860.00</div>
-            <div class="column">1</div>
-            <div class="column">$8,860.00</div>
+            <div class="column">{{row.ItemDescription}}</div>
+            <div class="column">{{row.VendorNum}}</div>
+            <div class="column">{{row.Currency}}{{row.Price}}</div>
+            <div class="column">{{row.Quantity}}</div>
+            <div class="column">{{row.Currency}}{{row.LineTotal}}</div>
         </div>
         <div class="row-line-meta">
-            <p>SKU: LSSMFR15IG100C</p>
-            <p class="emphasize">Lead time is 10 days</p>
-        </div>
-        <div class="row-line-text emphasize">
-            <object data="assets/row/card-contents-icon.svg" class="row-icon" type="image/svg+xml"></object>
-            <p>
-                CENTRIFUGAL PUMPS 1 B&G Base Mounted Pump Series e-1510, Model e-1510, 4 GC, SS, 30 HP, 1800 RPM, 286T Frame, with 11.5" Impeller,
-                STDBuna/Carbon/Ceramic/SS/Bronze Seal, , BG Choice, ODP, Nema Premium Efficient, Inverter Suitable, 230/460/3/60 Motor, 640 gpm, 120
-                ft Wt.: 979 lbs ea.
-            </p>
+            <p>SKU: {{row.ItemCode}}</p>
+            {% if row.U_LeadTime and row.U_LeadTime|int > 0 %}
+            <p class="emphasize">Lead time is {{ row.U_LeadTime }} days</p>
+            {% endif %}
         </div>
         <div class="row-liner"><div></div></div>
-        <div class="row-line">
-            <div class="column">MODEL E-1510, 4 GC, SS, 30 HP, 1800 RPM, 286T FRAME, WITH 11.5" IMPELLER</div>
-            <div class="column">100208631</div>
-            <div class="column">$8,860.00</div>
-            <div class="column">1</div>
-            <div class="column">$8,860.00</div>
-        </div>
-        <div class="row-line-meta">
-            <p>SKU: LSSMFR15IG100C</p>
-            <p class="emphasize">In Stock on 2/10/2025</p>
-        </div>
-        <div class="row-liner"><div></div></div>
+        {% endfor %}
     </div>
 </div>
